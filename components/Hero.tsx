@@ -29,10 +29,13 @@ export default function Hero() {
             A minimal, distraction-free desktop logger that helps you understand where your time actually goes. Designed for professionals who live in deep work.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="px-10 py-5 bg-accent text-white font-bold rounded-2xl hover:bg-accent/90 transition-all flex items-center gap-3 shadow-xl shadow-accent/20 active:scale-95">
+            <a 
+              href="https://github.com/vavilov2212/worklog_studio/releases/latest/download/worklogStudio.dmg"
+              className="px-10 py-5 bg-accent text-white font-bold rounded-2xl hover:bg-accent/90 transition-all flex items-center gap-3 shadow-xl shadow-accent/20 active:scale-95"
+            >
               <Download className="w-6 h-6" />
               Get Worklog for Mac
-            </button>
+            </a>
             <div className="flex flex-col justify-center">
               <span className="text-[10px] uppercase tracking-widest text-slate font-bold mb-1">Coming Next</span>
               <div className="flex gap-4 opacity-40">

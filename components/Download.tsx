@@ -26,10 +26,13 @@ export default function DownloadSection() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6">
-            <button className="px-10 py-5 bg-white text-accent font-black rounded-2xl hover:bg-white/90 transition-all flex items-center gap-3 shadow-xl active:scale-95">
+            <a 
+              href="https://github.com/vavilov2212/worklog_studio/releases/latest/download/worklogStudio.dmg"
+              className="px-10 py-5 bg-white text-accent font-black rounded-2xl hover:bg-white/90 transition-all flex items-center gap-3 shadow-xl active:scale-95"
+            >
               <Apple className="w-6 h-6 fill-current" />
               Download for Mac
-            </button>
+            </a>
             <button className="px-10 py-5 bg-accent-foreground/10 text-white/50 border border-white/20 font-black rounded-2xl cursor-not-allowed flex items-center gap-3">
               <Monitor className="w-6 h-6" />
               Windows Next

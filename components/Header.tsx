@@ -3,6 +3,7 @@
 import { motion } from 'motion/react';
 import { Logo } from './Logo';
 import Link from 'next/link';
+import { Github, Download } from 'lucide-react';
 
 export default function Header() {
   return (
@@ -20,7 +21,23 @@ export default function Header() {
           <Link href="#features" className="text-slate hover:text-ink transition-colors">Features</Link>
           <Link href="#roadmap" className="text-slate hover:text-ink transition-colors">Roadmap</Link>
         </nav>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
+          <a 
+            href="https://github.com/vavilov2212/worklog_studio/releases/latest/download/worklogStudio.dmg"
+            className="hidden sm:flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors"
+          >
+            <Download className="w-4 h-4" />
+            <span>Download for Mac</span>
+          </a>
+          <a 
+            href="https://github.com/vavilov2212/worklog_studio" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-2 text-slate hover:text-ink transition-colors"
+            aria-label="GitHub Repository"
+          >
+            <Github className="w-5 h-5" />
+          </a>
         </div>
       </div>
     </motion.header>
