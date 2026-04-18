@@ -5,9 +5,10 @@ import { motion } from 'motion/react';
 import { Download, Search, Square, Play, Plus, Monitor, ChevronDown, Copy, Circle } from 'lucide-react';
 import { Logo } from './Logo';
 
+import { useTimer } from './TimerContext';
+
 export default function Hero() {
-  const [isRunning, setIsRunning] = useState(true);
-  const [time, setTime] = useState(0);
+  const { isRunning, time, toggleTimer, formatTime } = useTimer();
   const [isMounted, setIsMounted] = useState(false);
   const [version, setVersion] = useState('v1.2');
 
@@ -16,11 +17,6 @@ export default function Hero() {
     const initHero = async () => {
       setIsMounted(true);
       
-      // Timer initialization
-      const randomMinutes = Math.floor(Math.random() * 60);
-      const randomSeconds = Math.floor(Math.random() * 60);
-      setTime(randomMinutes * 60 + randomSeconds);
-
       // Fetch latest version from GitHub
       try {
         const response = await fetch('https://api.github.com/repos/vavilov2212/worklog_studio/releases/latest');
@@ -40,33 +36,8 @@ export default function Hero() {
     requestAnimationFrame(initHero);
   }, []);
 
-  // Timer interval
-  useEffect(() => {
-    if (!isMounted) return;
-    
-    let interval: NodeJS.Timeout;
-    if (isRunning) {
-      interval = setInterval(() => {
-        setTime((prev) => prev + 1);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [isRunning, isMounted]);
-
-  const formatTime = (seconds: number) => {
-    const hrs = Math.floor(seconds / 3600);
-    const mins = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
   const handleToggleTimer = () => {
-    if (isRunning) {
-      setIsRunning(false);
-      setTime(0);
-    } else {
-      setIsRunning(true);
-    }
+    toggleTimer();
   };
 
   return (
@@ -116,7 +87,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-6 w-full lg:perspective-1000 order-2 lg:order-2"
         >
-          <div className="relative bg-white rounded-[24px] md:rounded-[32px] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] border border-border select-none lg:rotate-y-[-5deg] lg:hover:rotate-y-0 transition-transform duration-700">
+          <div className="relative bg-white rounded-[24px] md:rounded-[32px] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] border border-border select-none lg:rotate-y-[-5deg]">
             {/* Widget Title Bar */}
             <div className="bg-white border-b border-border py-3 md:py-4 px-4 md:px-6 flex items-center justify-between pointer-events-none">
                <div className="flex items-center gap-2">

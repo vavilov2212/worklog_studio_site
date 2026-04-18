@@ -3,8 +3,17 @@ import { Briefcase, LayoutDashboard, History, FolderRoot, CheckSquare, Settings,
 import { siteConfig } from '@/lib/config';
 import { Logo } from './Logo';
 
+import { useTimer } from './TimerContext';
+
 export default function FeatureVisual({ activeFeature }: { activeFeature: number }) {
+  const { isRunning, time, toggleTimer, formatTime } = useTimer();
   const feature = siteConfig.features[activeFeature];
+
+  const historyItems = [
+    { title: 'Take a GAP test', project: 'Study AI', duration: isRunning ? formatTime(time) : '00:00:00', status: isRunning ? 'Running' : 'Stopped', time: isRunning ? '07:22 PM - Now' : 'Stopped' },
+    { title: 'Landing page polish', project: 'Marketing', duration: '02:15:22', status: 'Finished', time: '12:45 PM - 03:00 PM' },
+    { title: 'Fix timer bug', project: 'Core Engine', duration: '00:45:12', status: 'Finished', time: '09:00 AM - 09:45 AM' },
+  ];
 
   return (
     <div className="absolute inset-0 w-full h-full bg-[#f8fafc] flex overflow-hidden">
@@ -26,7 +35,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
               { icon: CheckSquare, label: 'Tasks' },
               { icon: Settings, label: 'Settings', active: activeFeature === 2 },
             ].map((item, i) => (
-              <div key={i} className={`flex items-center gap-3 p-2 lg:px-4 lg:py-3 rounded-lg cursor-pointer transition-colors ${item.active ? 'bg-accent/5 text-accent' : 'text-slate hover:bg-subtle hover:text-ink'}`}>
+              <div key={i} className={`flex items-center gap-3 p-2 lg:px-4 lg:py-3 rounded-lg select-none ${item.active ? 'bg-accent/5 text-accent' : 'text-slate'}`}>
                  <item.icon className="w-5 h-5 shrink-0" />
                  <span className="hidden lg:block text-xs font-bold">{item.label}</span>
               </div>
@@ -51,10 +60,22 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
             </div>
             
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-               <div className="text-base sm:text-xl font-mono font-bold text-ink whitespace-nowrap">00:01:10</div>
-               <button className="bg-stop text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group transition-all hover:bg-stop/90 shadow-lg shadow-stop/10">
-                  <Square className="w-2.5 h-2.5 sm:w-3 h-3 fill-current" /> 
-                  <span className="hidden sm:inline">Stop</span>
+               <div className="text-base sm:text-xl font-mono font-bold text-ink whitespace-nowrap">{formatTime(time)}</div>
+               <button 
+                 onClick={toggleTimer}
+                 className={`${isRunning ? 'bg-stop hover:bg-stop/90 shadow-stop/10' : 'bg-accent hover:bg-accent/90 shadow-accent/10'} text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group transition-all shadow-lg overflow-hidden cursor-pointer`}
+               >
+                  {isRunning ? (
+                    <>
+                      <Square className="w-2.5 h-2.5 sm:w-3 h-3 fill-current" /> 
+                      <span className="hidden sm:inline">Stop</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-2.5 h-2.5 sm:w-3 h-3 fill-current ml-0.5" /> 
+                      <span className="hidden sm:inline">Start</span>
+                    </>
+                  )}
                </button>
             </div>
          </div>
@@ -74,17 +95,13 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                    <div className="w-full space-y-4 max-w-2xl mx-auto">
                       <div className="flex items-center justify-between mb-8">
                          <h2 className="text-xl sm:text-2xl font-black text-ink">Time History</h2>
-                         <button className="bg-accent text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-xl shadow-accent/20 transition-all hover:translate-y-[-2px]">
+                         <button className="bg-accent text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-xl shadow-accent/20 transition-all cursor-default">
                             <Plus className="w-4 h-4" /> New Entry
                          </button>
                       </div>
                       
-                      {[
-                        { title: 'Take a GAP test', project: 'Study AI', duration: '00:01:10', status: 'Running', time: '07:22 PM - Now' },
-                        { title: 'Landing page polish', project: 'Marketing', duration: '02:15:22', status: 'Finished', time: '12:45 PM - 03:00 PM' },
-                        { title: 'Fix timer bug', project: 'Core Engine', duration: '00:45:12', status: 'Finished', time: '09:00 AM - 09:45 AM' },
-                      ].map((item, i) => (
-                        <div key={i} className={`bg-white border ${item.status === 'Running' ? 'border-accent/30 shadow-lg shadow-accent/5 ring-1 ring-accent/5' : 'border-border'} rounded-2xl p-4 sm:p-5 flex items-center justify-between group transition-all hover:border-accent/40`}>
+                      {historyItems.map((item, i) => (
+                        <div key={i} className={`bg-white border ${item.status === 'Running' ? 'border-accent/30 shadow-lg shadow-accent/5 ring-1 ring-accent/5' : item.status === 'Stopped' ? 'border-border opacity-60' : 'border-border'} rounded-2xl p-4 sm:p-5 flex items-center justify-between select-none`}>
                            <div className="flex items-center gap-4 sm:gap-6 min-w-0">
                               <div className={`w-1 h-10 sm:h-12 rounded-full shrink-0 ${item.status === 'Running' ? 'bg-accent animate-pulse' : 'bg-slate/20'}`}></div>
                               <div className="min-w-0">
@@ -118,9 +135,9 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                                initial={{ height: 0 }}
                                animate={{ height: `${h}%` }}
                                transition={{ delay: i * 0.05, duration: 0.5 }}
-                               className="flex-1 bg-accent/20 rounded-t-md relative group"
+                               className="flex-1 bg-accent/20 rounded-t-md relative"
                              >
-                                <div className="absolute inset-0 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-center rounded-t-md"></div>
+                                <div className="absolute inset-0 bg-accent scale-x-0 transition-transform origin-center rounded-t-md"></div>
                              </motion.div>
                            ))}
                         </div>
@@ -150,7 +167,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                           { name: 'Google Calendar', desc: 'Import your work events automatically', active: false },
                           { name: 'Notion', desc: 'Sync summaries and project logs', active: false },
                         ].map((app, i) => (
-                          <div key={i} className="bg-white border border-border rounded-2xl p-5 sm:p-6 flex items-center justify-between gap-4 transition-all hover:border-accent/30 group">
+                          <div key={i} className="bg-white border border-border rounded-2xl p-5 sm:p-6 flex items-center justify-between gap-4 select-none">
                             <div className="flex flex-col gap-1 text-left min-w-0">
                                <h4 className="font-black text-ink text-sm sm:text-base leading-tight">{app.name}</h4>
                                <p className="text-[11px] sm:text-xs text-slate leading-relaxed font-medium">{app.desc}</p>

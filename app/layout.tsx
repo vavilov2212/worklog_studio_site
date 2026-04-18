@@ -12,11 +12,15 @@ export const metadata: Metadata = {
   description: 'The minimal desktop time logger designed for deep focus. High-precision analytics without the overhead of heavy management tools.',
 };
 
+import { TimerProvider } from '@/components/TimerContext';
+
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans bg-bg text-ink selection:bg-accent/30 selection:text-ink antialiased" suppressHydrationWarning>
-        {children}
+        <TimerProvider>
+          {children}
+        </TimerProvider>
       </body>
     </html>
   );
