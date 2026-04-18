@@ -39,7 +39,7 @@ export default function DownloadSection() {
             </button>
           </div>
           <p className="mt-8 text-[10px] uppercase tracking-widest text-white/40 font-black">
-            Universal Binary • Optimized for Apple Silicon & Intel
+            Native Desktop App • Performance Optimized
           </p>
         </div>
       </motion.div>

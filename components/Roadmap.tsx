@@ -2,10 +2,10 @@
 import { motion } from 'motion/react';
 
 const items = [
-  { phase: "Q1 2024", title: "macOS Native App", status: "Released", active: true },
-  { phase: "Q2 2024", title: "Advanced Analytics", status: "In Progress", active: true },
-  { phase: "Q3 2024", title: "Windows Support", status: "Planned", active: false },
-  { phase: "Q4 2024", title: "Team Collaboration", status: "Planned", active: false }
+  { phase: "Q1 2026", title: "macOS App", status: "Released", active: true },
+  { phase: "Q2 2026", title: "Advanced Analytics", status: "In Progress", active: true },
+  { phase: "Q4 2026", title: "Windows Support", status: "Planned", active: false },
+  { phase: "2027", title: "Team Collaboration", status: "Planned", active: false }
 ];
 
 export default function Roadmap() {
