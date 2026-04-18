@@ -5,7 +5,7 @@ export const Logo = ({ className = "w-10 h-10", iconOnly = false }: { className?
     <div className={`flex items-center gap-3 ${iconOnly ? '' : 'cursor-pointer'}`}>
       <div className={className}>
         <img 
-          src="/static/app_icon_256.png" 
+          src="/worklog_studio_site/static/app_icon_256.png" 
           alt="Worklog Studio" 
           className="w-full h-full object-contain"
           referrerPolicy="no-referrer"
