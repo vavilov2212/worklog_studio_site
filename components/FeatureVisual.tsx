@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Briefcase, LayoutDashboard, History, FolderRoot, CheckSquare, Settings, Bell, ChevronRight, Play, Square, Plus, MoreHorizontal } from 'lucide-react';
 import { siteConfig } from '@/lib/config';
+import { Logo } from './Logo';
 
 export default function FeatureVisual({ activeFeature }: { activeFeature: number }) {
   const feature = siteConfig.features[activeFeature];
@@ -10,9 +11,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
       {/* Mini Sidebar */}
       <div className="w-16 md:w-48 bg-white border-r border-border flex flex-col p-4 shrink-0">
          <div className="flex items-center gap-3 mb-10 px-2 lg:px-4">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-accent rounded-lg flex items-center justify-center shrink-0">
-               <Briefcase className="w-5 h-5 text-white" />
-            </div>
+            <Logo iconOnly className="w-8 h-8 md:w-10 md:h-10 shrink-0" />
             <div className="hidden md:block">
                <h3 className="text-xs font-bold text-ink">Worklog</h3>
                <p className="text-[8px] uppercase tracking-widest text-slate font-bold">Studio</p>

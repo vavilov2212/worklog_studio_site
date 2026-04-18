@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Download, Search, Play, Square, Briefcase, Plus, Monitor, ChevronDown, Copy, Circle } from 'lucide-react';
+import { Download, Search, Square, Briefcase, Plus, Monitor, ChevronDown, Copy, Circle } from 'lucide-react';
+import { Logo } from './Logo';
 
 export default function Hero() {
   return (
@@ -111,9 +112,7 @@ export default function Hero() {
                   </div>
                   
                   <div className="flex items-center gap-4 group">
-                     <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center shadow-lg shadow-accent/20">
-                        <Briefcase className="w-5 h-5 text-white" />
-                     </div>
+                     <Logo className="w-12 h-12" iconOnly />
                      <div>
                         <h5 className="font-bold text-ink text-sm">Take a GAP test</h5>
                         <p className="text-xs text-slate font-medium">Study AI</p>
