@@ -12,12 +12,6 @@ export default function Footer() {
           <p className="text-slate text-lg leading-relaxed max-w-sm mb-8 mt-6">
             The minimal desktop time logger designed for professionals who live in deep work.
           </p>
-          <div className="flex gap-4">
-             <div className="bg-white p-3 rounded-lg border border-border shadow-sm">
-                <p className="text-[9px] uppercase tracking-widest text-slate font-black mb-1">Coming Next</p>
-                <p className="text-sm font-bold text-ink">iOS & Mobile App</p>
-             </div>
-          </div>
         </div>
         
         <div className="md:col-span-2 md:col-start-7 text-sm font-medium">

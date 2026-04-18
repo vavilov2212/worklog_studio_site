@@ -42,6 +42,7 @@ export default function Features() {
               feature={feature} 
               index={index} 
               setActiveFeature={setActiveFeature}
+              activeFeature={activeFeature}
             />
           ))}
         </div>
@@ -65,7 +66,7 @@ export default function Features() {
   );
 }
 
-function FeatureItem({ feature, index, setActiveFeature }: { feature: any, index: number, setActiveFeature: (i: number) => void }) {
+function FeatureItem({ feature, index, setActiveFeature, activeFeature }: { feature: any, index: number, setActiveFeature: (i: number) => void, activeFeature: number }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -82,10 +83,19 @@ function FeatureItem({ feature, index, setActiveFeature }: { feature: any, index
   }, [scrollYProgress, setActiveFeature, index]);
 
   return (
-    <div id={`feature-${index}`} ref={ref} className="min-h-[70vh] flex flex-col justify-center">
-      <div className="text-accent font-mono text-sm mb-4 tracking-widest">0{index + 1}</div>
-      <h3 className="text-3xl md:text-4xl font-bold font-sans mb-6 text-ink">{feature.title}</h3>
-      <p className="text-lg text-slate leading-relaxed">{feature.description}</p>
+    <div id={`feature-${index}`} ref={ref} className="min-h-[70vh] lg:min-h-[70vh] flex flex-col justify-center py-12 lg:py-0">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="text-accent font-mono text-[10px] sm:text-xs tracking-widest leading-none font-black opacity-80">0{index + 1}</div>
+        <div className="h-px bg-accent/20 flex-1"></div>
+      </div>
+      <h3 className="text-3xl md:text-4xl font-extrabold font-sans mb-6 text-ink tracking-tight">{feature.title}</h3>
+      
+      {/* Mobile/Tablet Visual */}
+      <div className="lg:hidden w-full h-[350px] mb-8 rounded-2xl overflow-hidden glass-panel border border-border/50 shadow-xl">
+        <FeatureVisual activeFeature={index} />
+      </div>
+
+      <p className="text-lg text-slate leading-relaxed lg:max-w-md">{feature.description}</p>
     </div>
   );
 }

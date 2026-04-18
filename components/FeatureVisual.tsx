@@ -9,7 +9,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
   return (
     <div className="absolute inset-0 w-full h-full bg-[#f8fafc] flex overflow-hidden">
       {/* Mini Sidebar */}
-      <div className="hidden sm:flex sm:w-16 lg:w-56 bg-white border-r border-border flex-col p-4 shrink-0 transition-all duration-300">
+      <div className="hidden lg:flex lg:w-56 bg-white border-r border-border flex-col p-4 shrink-0 transition-all duration-300">
          <div className="flex items-center gap-3 mb-10 px-2">
             <Logo iconOnly className="w-8 h-8 shrink-0" />
             <div className="hidden lg:block">
@@ -37,23 +37,23 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
          {/* Top Header */}
-         <div className="h-20 bg-white border-b border-border flex items-center justify-between px-4 sm:px-6 shrink-0 gap-4">
+         <div className="h-16 sm:h-20 bg-white border-b border-border flex items-center justify-between px-4 sm:px-6 shrink-0 gap-4">
             <div className="flex flex-1 items-center gap-4 sm:gap-8 overflow-hidden">
                <div className="flex flex-col min-w-0">
                   <span className="text-[8px] sm:text-[9px] uppercase tracking-widest text-slate font-black mb-0.5">Project</span>
-                  <div className="font-bold text-[11px] sm:text-xs text-ink truncate">Study AI</div>
+                  <div className="font-bold text-[10px] sm:text-xs text-ink truncate">Study AI</div>
                </div>
                <div className="w-px h-6 bg-border shrink-0"></div>
                <div className="flex flex-col min-w-0">
                   <span className="text-[8px] sm:text-[9px] uppercase tracking-widest text-slate font-black mb-0.5">Task</span>
-                  <div className="font-bold text-[11px] sm:text-xs text-ink truncate">Take a GAP test</div>
+                  <div className="font-bold text-[10px] sm:text-xs text-ink truncate">Take a GAP test</div>
                </div>
             </div>
             
             <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-               <div className="text-lg sm:text-xl font-mono font-bold text-ink whitespace-nowrap">00:01:10</div>
-               <button className="bg-stop text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group transition-all hover:bg-stop/90 shadow-lg shadow-stop/10">
-                  <Square className="w-3 h-3 fill-current" /> 
+               <div className="text-base sm:text-xl font-mono font-bold text-ink whitespace-nowrap">00:01:10</div>
+               <button className="bg-stop text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[9px] sm:text-[10px] font-black uppercase tracking-widest flex items-center gap-2 group transition-all hover:bg-stop/90 shadow-lg shadow-stop/10">
+                  <Square className="w-2.5 h-2.5 sm:w-3 h-3 fill-current" /> 
                   <span className="hidden sm:inline">Stop</span>
                </button>
             </div>
@@ -68,10 +68,10 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                  animate={{ opacity: 1, x: 0 }}
                  exit={{ opacity: 0, x: -20 }}
                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                 className="flex h-full gap-8"
+                 className="w-full h-full"
                >
                  {activeFeature === 0 && (
-                   <div className="flex-1 space-y-4 max-w-2xl mx-auto">
+                   <div className="w-full space-y-4 max-w-2xl mx-auto">
                       <div className="flex items-center justify-between mb-8">
                          <h2 className="text-xl sm:text-2xl font-black text-ink">Time History</h2>
                          <button className="bg-accent text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-xl shadow-accent/20 transition-all hover:translate-y-[-2px]">
@@ -108,7 +108,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                  )}
 
                  {activeFeature === 1 && (
-                   <div className="flex-1 flex flex-col">
+                   <div className="w-full flex flex-col max-w-2xl mx-auto">
                       <h2 className="text-2xl font-black text-ink mb-8">Focus Analytics</h2>
                       <div className="flex-1 bg-white border border-border rounded-2xl p-8 relative flex flex-col">
                         <div className="flex justify-between items-end gap-2 h-40">
@@ -141,7 +141,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                  )}
 
                  {activeFeature === 2 && (
-                   <div className="flex-1 flex flex-col">
+                   <div className="w-full flex flex-col max-w-2xl mx-auto">
                       <h2 className="text-2xl font-black text-ink mb-8">Integration Sync</h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         {[
