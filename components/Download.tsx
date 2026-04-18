@@ -1,27 +1,43 @@
 'use client';
 import { motion } from 'motion/react';
-import { Apple } from 'lucide-react';
+import { Apple, Download, Monitor } from 'lucide-react';
 
-export default function Download() {
+export default function DownloadSection() {
   return (
-    <section className="max-w-5xl mx-auto px-8 py-32">
+    <section id="download" className="max-w-6xl mx-auto px-8 py-32">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="bg-white rounded-3xl p-12 md:p-20 text-center relative overflow-hidden border border-border"
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="bg-accent rounded-[48px] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-accent/30"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent"></div>
-        <div className="relative z-10">
-          <h2 className="text-4xl md:text-6xl font-bold font-sans text-ink mb-6 tracking-tight">Ready to find your flow?</h2>
-          <p className="text-xl text-slate mb-10 max-w-2xl mx-auto">Join thousands of deep workers who have already upgraded their productivity.</p>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.2),transparent)]"></div>
+        <div className="relative z-10 flex flex-col items-center">
+          <div className="w-20 h-20 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center mb-10 border border-white/30">
+             <Download className="w-10 h-10 text-white" />
+          </div>
+          <h2 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter leading-none max-w-3xl">
+            Upgrade your flow. <br/>
+            <span className="opacity-60">Ready for macOS Sonoma.</span>
+          </h2>
+          <p className="text-xl text-white/80 font-medium mb-12 max-w-xl">
+            Get the native desktop experience designed for maximum productivity and zero distractions.
+          </p>
           
-          <button className="px-8 py-4 bg-ink text-white font-bold rounded-lg hover:bg-ink/90 transition-colors inline-flex items-center gap-3">
-            <Apple className="w-6 h-6" />
-            Download for macOS
-          </button>
-          <p className="mt-6 text-sm text-slate font-mono">Requires macOS 12.0 or later.</p>
+          <div className="flex flex-col sm:flex-row gap-6">
+            <button className="px-10 py-5 bg-white text-accent font-black rounded-2xl hover:bg-white/90 transition-all flex items-center gap-3 shadow-xl active:scale-95">
+              <Apple className="w-6 h-6 fill-current" />
+              Download for Mac
+            </button>
+            <button className="px-10 py-5 bg-accent-foreground/10 text-white/50 border border-white/20 font-black rounded-2xl cursor-not-allowed flex items-center gap-3">
+              <Monitor className="w-6 h-6" />
+              Windows Next
+            </button>
+          </div>
+          <p className="mt-8 text-[10px] uppercase tracking-widest text-white/40 font-black">
+            Universal Binary • Optimized for Apple Silicon & Intel
+          </p>
         </div>
       </motion.div>
     </section>
