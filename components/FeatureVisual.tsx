@@ -16,7 +16,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
   ];
 
   return (
-    <div className="absolute inset-0 w-full h-full bg-[#f8fafc] flex overflow-hidden">
+    <div className="w-full h-full lg:absolute lg:inset-0 bg-[#f8fafc] flex flex-col lg:flex-row overflow-hidden">
       {/* Mini Sidebar */}
       <div className="hidden lg:flex lg:w-56 bg-white border-r border-border flex-col p-4 shrink-0 transition-all duration-300">
          <div className="flex items-center gap-3 mb-10 px-2">
@@ -81,7 +81,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
          </div>
 
          {/* Content View with Switcher */}
-         <div className="flex-1 p-4 sm:p-6 lg:p-10 overflow-hidden relative bg-[#f8fafc]">
+         <div className="flex-1 p-4 sm:p-6 lg:p-10 overflow-visible lg:overflow-hidden relative bg-[#f8fafc]">
             <AnimatePresence mode="wait">
                <motion.div
                  key={activeFeature}
@@ -89,7 +89,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                  animate={{ opacity: 1, x: 0 }}
                  exit={{ opacity: 0, x: -20 }}
                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                 className="w-full h-full"
+                 className="w-full h-auto lg:h-full pb-4 lg:pb-0"
                >
                  {activeFeature === 0 && (
                    <div className="w-full space-y-4 max-w-2xl mx-auto">
@@ -141,13 +141,13 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                              </motion.div>
                            ))}
                         </div>
-                        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
                            {[
                              { label: 'Flow Score', value: '98%' },
                              { label: 'Deep Work', value: '6.5h' },
                              { label: 'Efficiency', value: '+12%' },
                            ].map((stat, i) => (
-                             <div key={i} className="bg-subtle rounded-xl p-4 border border-border/50 flex flex-col justify-center min-h-[80px]">
+                             <div key={i} className={`bg-subtle rounded-xl p-4 border border-border/50 flex flex-col justify-center min-h-[70px] sm:min-h-[80px] ${i === 2 ? 'col-span-2 sm:col-span-1' : ''}`}>
                                 <p className="text-[9px] uppercase tracking-[0.2em] text-slate font-black mb-1 leading-tight break-words">{stat.label}</p>
                                 <p className="text-xl font-black text-ink leading-none">{stat.value}</p>
                              </div>
@@ -160,7 +160,7 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                  {activeFeature === 2 && (
                    <div className="w-full flex flex-col max-w-2xl mx-auto">
                       <h2 className="text-2xl font-black text-ink mb-8">Integration Sync</h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                         {[
                           { name: 'GitHub', desc: 'Sync commits and pull requests', active: true },
                           { name: 'Linear', desc: 'Link issues to your workspace', active: true },

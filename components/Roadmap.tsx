@@ -10,8 +10,8 @@ const items = [
 
 export default function Roadmap() {
   return (
-    <section id="roadmap" className="max-w-7xl mx-auto px-8 py-32 border-t border-border">
-      <div className="mb-16">
+    <section id="roadmap" className="max-w-7xl mx-auto px-8 py-16 lg:py-24 border-t border-border">
+      <div className="mb-12 lg:mb-16">
         <h2 className="text-3xl md:text-5xl font-bold font-sans text-ink mb-6">The Roadmap</h2>
         <p className="text-slate max-w-2xl text-lg">We&apos;re building the future of time tracking in public. Here is what&apos;s coming next.</p>
       </div>

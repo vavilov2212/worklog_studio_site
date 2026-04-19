@@ -41,7 +41,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-6 md:px-8 pt-32 md:pt-48 pb-20 md:pb-32 relative overflow-hidden bg-bg">
+    <section className="max-w-7xl mx-auto px-6 md:px-8 pt-24 md:pt-48 pb-12 md:pb-24 relative overflow-hidden bg-bg">
       <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px]"></div>
       <div className="absolute bottom-0 left-0 -z-10 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px]"></div>
       

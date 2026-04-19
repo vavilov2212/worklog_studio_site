@@ -3,8 +3,8 @@ import { Logo } from './Logo';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-subtle pt-24 pb-12 px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
+    <footer className="border-t border-border bg-subtle pt-12 pb-8 px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 mb-12">
         <div className="md:col-span-5">
           <Link href="/">
             <Logo />
