@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: 'Worklog Studio | Track your work. Understand your flow.',
   description: 'The minimal desktop time logger designed for deep focus. High-precision analytics without the overhead of heavy management tools.',
   icons: {
-    icon: '/worklog_studio/icon.svg',
+    icon: '/worklog_studio_site/icon.svg',
   },
 };
 
