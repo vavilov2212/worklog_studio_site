@@ -25,14 +25,14 @@ export default function Footer() {
         <div className="md:col-span-2 text-sm font-medium">
           <h4 className="text-ink font-black text-xs uppercase tracking-widest mb-8">Resources</h4>
           <ul className="space-y-4 text-slate">
-            <li><a href="https://github.com/vavilov2212/worklog_studio/releases" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Changelog</a></li>
+            <li><a href="https://github.com/vavilov2212/wl-studio/releases" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Changelog</a></li>
           </ul>
         </div>
 
         <div className="md:col-span-2 text-sm font-medium">
           <h4 className="text-ink font-black text-xs uppercase tracking-widest mb-8">Connect</h4>
           <ul className="space-y-4 text-slate">
-            <li><a href="https://github.com/vavilov2212/worklog_studio" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">GitHub</a></li>
+            <li><a href="https://github.com/vavilov2212/wl-studio" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">GitHub</a></li>
           </ul>
         </div>
       </div>
@@ -40,7 +40,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto pt-10 border-t border-border flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-slate font-bold uppercase tracking-widest">
         <p>© {new Date().getFullYear()} Roman Vavilov</p>
         <div className="flex gap-8">
-          <a href="https://github.com/vavilov2212/worklog_studio/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">License</a>
+          <a href="https://github.com/vavilov2212/wl-studio/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">License</a>
         </div>
       </div>
     </footer>
