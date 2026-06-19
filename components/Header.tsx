@@ -16,7 +16,9 @@ export default function Header() {
   const [os, setOs] = useState<DetectedOS>('other');
 
   useEffect(() => {
-    setOs(detectOS());
+    requestAnimationFrame(() => {
+      setOs(detectOS());
+    });
   }, []);
 
   const { primaryOS, primaryUrl } = getPlatformLinks(os, release);

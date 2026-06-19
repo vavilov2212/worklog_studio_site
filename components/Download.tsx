@@ -12,7 +12,9 @@ export default function DownloadSection() {
   const [os, setOs] = useState<DetectedOS>('other');
 
   useEffect(() => {
-    setOs(detectOS());
+    requestAnimationFrame(() => {
+      setOs(detectOS());
+    });
   }, []);
 
   const { primaryOS, primaryUrl, secondaryOS, secondaryUrl } = getPlatformLinks(os, release);
