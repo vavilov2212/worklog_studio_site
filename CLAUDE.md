@@ -29,8 +29,8 @@ components/
   Features.tsx         "Engineered for Flow State" — maps over siteConfig.features, alternating Z-pattern rows
   FeatureVisual.tsx     The animated dashboard mockup shown inside each Features row (history/analytics/integrations views)
   FeatureNavigation.tsx Floating bottom pager for jumping between feature sections (NOT currently rendered in page.tsx — orphaned/unused)
-  Roadmap.tsx           "The Roadmap" — hardcoded 4-item grid (macOS/Analytics/Windows/Team)
-  Download.tsx          Bottom blue CTA block ("Upgrade your flow... Ready for macOS Sonoma")
+  Roadmap.tsx           "The Roadmap" — hardcoded 3-item grid (Desktop App macOS&Windows/Analytics/Team)
+  Download.tsx          Bottom blue CTA block ("Upgrade your flow... Ready for macOS & Windows")
   Footer.tsx             Site footer — link columns + copyright
   UseCases.tsx           "Built for Deep Workers" persona cards (Engineers/Designers/Founders) — NOT imported in page.tsx (orphaned/unused)
   TimerContext.tsx       React Context providing shared mock timer state (isRunning/time/toggleTimer/formatTime) consumed by Hero + FeatureVisual so both widgets stay in sync
