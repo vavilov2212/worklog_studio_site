@@ -10,24 +10,34 @@ const TOP_K = 4;
 const SIMILARITY_THRESHOLD = 0.7;
 
 export async function POST(request: Request): Promise<Response> {
-  const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
   const { success } = await checkRateLimit(ip);
   if (!success) {
     return new Response('Too many requests', { status: 429 });
   }
 
-  const { history, question } = (await request.json()) as {
-    history: ChatMessage[];
-    question: string;
-  };
+  let history: ChatMessage[];
+  let question: string;
+  try {
+    const body = (await request.json()) as { history: ChatMessage[]; question: string };
+    history = body.history;
+    question = body.question;
+  } catch {
+    return new Response('Invalid request body', { status: 400 });
+  }
 
-  const queryEmbedding = await embedQuery(question);
-  const chunks = retrieveTopChunks(
-    queryEmbedding,
-    embeddingsData as RagChunk[],
-    TOP_K,
-    SIMILARITY_THRESHOLD
-  );
+  let chunks: RagChunk[];
+  try {
+    const queryEmbedding = await embedQuery(question);
+    chunks = retrieveTopChunks(
+      queryEmbedding,
+      embeddingsData as RagChunk[],
+      TOP_K,
+      SIMILARITY_THRESHOLD
+    );
+  } catch {
+    return new Response('Failed to process request', { status: 502 });
+  }
 
   if (chunks.length === 0) {
     return new Response(
@@ -40,10 +50,14 @@ export async function POST(request: Request): Promise<Response> {
 
   const stream = new ReadableStream({
     async start(controller) {
-      for await (const chunk of streamAnswer({ systemInstruction, history, question })) {
-        controller.enqueue(new TextEncoder().encode(chunk));
+      try {
+        for await (const chunk of streamAnswer({ systemInstruction, history, question })) {
+          controller.enqueue(new TextEncoder().encode(chunk));
+        }
+        controller.close();
+      } catch (err) {
+        controller.error(err);
       }
-      controller.close();
     },
   });
 

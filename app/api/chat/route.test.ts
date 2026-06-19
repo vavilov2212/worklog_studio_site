@@ -58,4 +58,48 @@ describe('POST /api/chat', () => {
     const text = await res.text();
     expect(text).toBe('Hello world');
   });
+
+  it('returns 400 for malformed JSON body', async () => {
+    const req = new Request('http://localhost/api/chat', {
+      method: 'POST',
+      headers: { 'x-forwarded-for': '1.2.3.4', 'content-type': 'application/json' },
+      body: '{not valid json',
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(400);
+  });
+
+  it('returns 502 when embedQuery fails', async () => {
+    embedQuery.mockRejectedValue(new Error('Gemini embed failed'));
+    const res = await POST(makeRequest({ history: [], question: 'hi' }));
+    expect(res.status).toBe(502);
+  });
+
+  it('returns 502 when retrieveTopChunks throws', async () => {
+    retrieveTopChunks.mockImplementation(() => {
+      throw new Error('retrieval failed');
+    });
+    const res = await POST(makeRequest({ history: [], question: 'hi' }));
+    expect(res.status).toBe(502);
+  });
+
+  it('errors the stream cleanly when streamAnswer throws mid-iteration', async () => {
+    retrieveTopChunks.mockReturnValue([
+      { id: 'a', source: 's', heading: 'H', text: 'context text', embedding: [1, 0, 0, 0] },
+    ]);
+    async function* failing() {
+      yield 'Hello';
+      throw new Error('stream blew up');
+    }
+    streamAnswer.mockReturnValue(failing());
+
+    const res = await POST(makeRequest({ history: [], question: 'hi' }));
+    await expect(res.text()).rejects.toThrow();
+  });
+
+  it('uses only the first segment of a multi-hop x-forwarded-for header as the rate-limit key', async () => {
+    const req = makeRequest({ history: [], question: 'hi' }, '5.6.7.8, 10.0.0.1, 10.0.0.2');
+    await POST(req);
+    expect(checkRateLimit).toHaveBeenCalledWith('5.6.7.8');
+  });
 });
