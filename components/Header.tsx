@@ -1,13 +1,27 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Logo } from './Logo';
 import Link from 'next/link';
 import { Github, Download } from 'lucide-react';
 import AskAIHeaderPill from './chat/AskAIHeaderPill';
 import ChatOverlay from './chat/ChatOverlay';
+import { useRelease } from './ReleaseContext';
+import { detectOS, type DetectedOS } from '@/lib/detectOS';
+import { getPlatformLinks } from '@/lib/release';
 
 export default function Header() {
+  const release = useRelease();
+  const [os, setOs] = useState<DetectedOS>('other');
+
+  useEffect(() => {
+    setOs(detectOS());
+  }, []);
+
+  const { primaryOS, primaryUrl } = getPlatformLinks(os, release);
+  const label = primaryOS === 'mac' ? 'Download for Mac' : primaryOS === 'windows' ? 'Download for Windows' : 'Download';
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -26,15 +40,15 @@ export default function Header() {
         <div className="flex items-center gap-4 md:gap-6">
           <AskAIHeaderPill />
           <a
-            href="https://github.com/vavilov2212/worklog_studio/releases/latest/download/worklogStudio.dmg"
+            href={primaryUrl}
             className="flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors p-2 sm:p-0"
-            title="Download for Mac"
+            title={label}
           >
             <Download className="w-5 h-5 sm:w-4 sm:h-4" />
-            <span className="hidden sm:inline-block">Download for Mac</span>
+            <span className="hidden sm:inline-block whitespace-nowrap">{label}</span>
           </a>
           <a
-            href="https://github.com/vavilov2212/worklog_studio"
+            href="https://github.com/vavilov2212/wl-studio"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate hover:text-ink transition-colors"
