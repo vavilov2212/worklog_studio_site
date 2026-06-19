@@ -1,0 +1,30 @@
+[
+  {
+    "id": "stub-tracking-1",
+    "source": "stub",
+    "heading": "Frictionless Tracking",
+    "text": "Worklog Studio lets you start logging a deep work session with a single keystroke, no forms or project setup required.",
+    "embedding": [0.9, 0.1, 0.0, 0.1]
+  },
+  {
+    "id": "stub-analytics-1",
+    "source": "stub",
+    "heading": "Focus Analytics",
+    "text": "Worklog Studio's analytics engine identifies your peak productivity hours and flow states from your tracked sessions.",
+    "embedding": [0.1, 0.9, 0.1, 0.0]
+  },
+  {
+    "id": "stub-roadmap-1",
+    "source": "stub",
+    "heading": "Roadmap",
+    "text": "The macOS app is released. Advanced analytics is in progress. Windows support and team collaboration are planned for later.",
+    "embedding": [0.0, 0.1, 0.9, 0.1]
+  },
+  {
+    "id": "stub-author-1",
+    "source": "stub",
+    "heading": "About the Author",
+    "text": "Worklog Studio is built by Roman Vavilov as a portfolio project demonstrating full-stack and AI engineering skills.",
+    "embedding": [0.1, 0.0, 0.1, 0.9]
+  }
+]

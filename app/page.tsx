@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import AskAISection from '@/components/chat/AskAISection';
 import Features from '@/components/Features';
 import Roadmap from '@/components/Roadmap';
 import Download from '@/components/Download';
@@ -10,6 +11,7 @@ export default function Home() {
     <main className="min-h-screen bg-surface text-on-surface selection:bg-primary/30">
       <Header />
       <Hero />
+      <AskAISection />
       <Features />
       <Roadmap />
       <Download />

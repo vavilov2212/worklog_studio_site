@@ -11,18 +11,21 @@ export const metadata: Metadata = {
   title: 'Worklog Studio | Track your work. Understand your flow.',
   description: 'The minimal desktop time logger designed for deep focus. High-precision analytics without the overhead of heavy management tools.',
   icons: {
-    icon: '/worklog_studio_site/icon.svg',
+    icon: '/icon.svg',
   },
 };
 
 import { TimerProvider } from '@/components/TimerContext';
+import { ChatProvider } from '@/components/chat/ChatContext';
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans bg-bg text-ink selection:bg-accent/30 selection:text-ink antialiased" suppressHydrationWarning>
         <TimerProvider>
-          {children}
+          <ChatProvider>
+            {children}
+          </ChatProvider>
         </TimerProvider>
       </body>
     </html>

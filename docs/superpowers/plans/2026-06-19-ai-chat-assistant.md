@@ -196,7 +196,7 @@ describe('retrieveTopChunks', () => {
   });
 
   it('returns an empty array when nothing clears the threshold', () => {
-    const result = retrieveTopChunks([0, 1], chunks, 2, 0.99);
+    const result = retrieveTopChunks([0, 1], chunks, 2, 1.5);
     expect(result).toEqual([]);
   });
 
@@ -277,13 +277,15 @@ git commit -m "feat: add cosine-similarity retrieval for RAG chunks"
 // lib/rag/gemini.test.ts
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const embedContent = vi.fn();
-const generateContentStream = vi.fn();
+const { embedContent, generateContentStream } = vi.hoisted(() => ({
+  embedContent: vi.fn(),
+  generateContentStream: vi.fn(),
+}));
 
 vi.mock('@google/genai', () => ({
-  GoogleGenAI: vi.fn().mockImplementation(() => ({
-    models: { embedContent, generateContentStream },
-  })),
+  GoogleGenAI: class {
+    models = { embedContent, generateContentStream };
+  },
 }));
 
 import { embedQuery, streamAnswer } from './gemini';
@@ -422,7 +424,7 @@ git commit -m "feat: add Gemini embedding and streaming generation wrapper"
 // lib/rag/ratelimit.test.ts
 import { describe, it, expect, vi } from 'vitest';
 
-const limit = vi.fn();
+const { limit } = vi.hoisted(() => ({ limit: vi.fn() }));
 
 vi.mock('@upstash/ratelimit', () => ({
   Ratelimit: class {
@@ -575,10 +577,12 @@ git commit -m "feat: add stub RAG corpus for backend/frontend development"
 // app/api/chat/route.test.ts
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
-const checkRateLimit = vi.fn();
-const embedQuery = vi.fn();
-const retrieveTopChunks = vi.fn();
-const streamAnswer = vi.fn();
+const { checkRateLimit, embedQuery, retrieveTopChunks, streamAnswer } = vi.hoisted(() => ({
+  checkRateLimit: vi.fn(),
+  embedQuery: vi.fn(),
+  retrieveTopChunks: vi.fn(),
+  streamAnswer: vi.fn(),
+}));
 
 vi.mock('@/lib/rag/ratelimit', () => ({ checkRateLimit }));
 vi.mock('@/lib/rag/gemini', () => ({ embedQuery, streamAnswer }));
