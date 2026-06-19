@@ -4,10 +4,12 @@ import { motion } from 'motion/react';
 import { Logo } from './Logo';
 import Link from 'next/link';
 import { Github, Download } from 'lucide-react';
+import AskAIHeaderPill from './chat/AskAIHeaderPill';
+import ChatOverlay from './chat/ChatOverlay';
 
 export default function Header() {
   return (
-    <motion.header 
+    <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -22,7 +24,8 @@ export default function Header() {
           <Link href="#roadmap" className="text-slate hover:text-ink transition-colors">Roadmap</Link>
         </nav>
         <div className="flex items-center gap-4 md:gap-6">
-          <a 
+          <AskAIHeaderPill />
+          <a
             href="https://github.com/vavilov2212/worklog_studio/releases/latest/download/worklogStudio.dmg"
             className="flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors p-2 sm:p-0"
             title="Download for Mac"
@@ -30,9 +33,9 @@ export default function Header() {
             <Download className="w-5 h-5 sm:w-4 sm:h-4" />
             <span className="hidden sm:inline-block">Download for Mac</span>
           </a>
-          <a 
-            href="https://github.com/vavilov2212/worklog_studio" 
-            target="_blank" 
+          <a
+            href="https://github.com/vavilov2212/worklog_studio"
+            target="_blank"
             rel="noopener noreferrer"
             className="p-2 text-slate hover:text-ink transition-colors"
             aria-label="GitHub Repository"
@@ -41,6 +44,7 @@ export default function Header() {
           </a>
         </div>
       </div>
+      <ChatOverlay />
     </motion.header>
   );
 }
