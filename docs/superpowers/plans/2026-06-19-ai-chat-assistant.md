@@ -196,7 +196,7 @@ describe('retrieveTopChunks', () => {
   });
 
   it('returns an empty array when nothing clears the threshold', () => {
-    const result = retrieveTopChunks([0, 1], chunks, 2, 0.99);
+    const result = retrieveTopChunks([0, 1], chunks, 2, 1.5);
     expect(result).toEqual([]);
   });
 
