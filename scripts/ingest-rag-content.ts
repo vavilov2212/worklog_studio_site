@@ -6,7 +6,7 @@ import type { RagChunk } from '../lib/rag/types';
 
 const CONTENT_DIR = join(__dirname, '..', 'content', 'rag');
 const OUTPUT_PATH = join(__dirname, '..', 'lib', 'rag', 'embeddings.json');
-const EMBEDDING_MODEL = 'text-embedding-004';
+const EMBEDDING_MODEL = 'gemini-embedding-001';
 const BATCH_SIZE = 10;
 
 async function main() {

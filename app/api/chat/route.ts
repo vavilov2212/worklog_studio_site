@@ -35,7 +35,8 @@ export async function POST(request: Request): Promise<Response> {
       TOP_K,
       SIMILARITY_THRESHOLD
     );
-  } catch {
+  } catch (err) {
+    console.error('Failed to embed/retrieve for chat request:', err);
     return new Response('Failed to process request', { status: 502 });
   }
 
