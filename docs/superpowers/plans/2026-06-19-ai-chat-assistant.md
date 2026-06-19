@@ -281,9 +281,9 @@ const embedContent = vi.fn();
 const generateContentStream = vi.fn();
 
 vi.mock('@google/genai', () => ({
-  GoogleGenAI: vi.fn().mockImplementation(() => ({
-    models: { embedContent, generateContentStream },
-  })),
+  GoogleGenAI: class {
+    models = { embedContent, generateContentStream };
+  },
 }));
 
 import { embedQuery, streamAnswer } from './gemini';
