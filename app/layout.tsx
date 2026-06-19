@@ -17,16 +17,19 @@ export const metadata: Metadata = {
 
 import { TimerProvider } from '@/components/TimerContext';
 import { ChatProvider } from '@/components/chat/ChatContext';
+import { ReleaseProvider } from '@/components/ReleaseContext';
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans bg-bg text-ink selection:bg-accent/30 selection:text-ink antialiased" suppressHydrationWarning>
-        <TimerProvider>
-          <ChatProvider>
-            {children}
-          </ChatProvider>
-        </TimerProvider>
+        <ReleaseProvider>
+          <TimerProvider>
+            <ChatProvider>
+              {children}
+            </ChatProvider>
+          </TimerProvider>
+        </ReleaseProvider>
       </body>
     </html>
   );
