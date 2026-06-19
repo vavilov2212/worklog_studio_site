@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Send, Square, Check } from 'lucide-react';
+import { Send, Square } from 'lucide-react';
 import { useChat } from './ChatContext';
 import { SUGGESTED_PROMPTS } from './suggestedPrompts';
+import SuggestedPromptChips from './SuggestedPromptChips';
 
 const MAX_TEXTAREA_HEIGHT = 120;
 
@@ -82,27 +83,13 @@ export default function ChatPanel() {
           </div>
         ))}
 
-        <div className="flex flex-wrap gap-2 pt-1">
-          {SUGGESTED_PROMPTS.map((prompt) => {
-            const justAsked = prompt === lastUserQuestion;
-            return (
-              <button
-                key={prompt}
-                type="button"
-                onClick={() => void sendMessage(prompt)}
-                disabled={isStreaming}
-                className={`text-xs font-medium rounded-full px-3 py-1.5 border transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 flex items-center gap-1.5 ${
-                  justAsked
-                    ? 'text-accent bg-accent/15 border-accent/40'
-                    : 'text-accent bg-accent/10 border-accent/20 hover:bg-accent/20'
-                }`}
-              >
-                {justAsked && <Check className="w-3 h-3" />}
-                {prompt}
-              </button>
-            );
-          })}
-        </div>
+        <SuggestedPromptChips
+          prompts={SUGGESTED_PROMPTS}
+          onSelect={(prompt) => void sendMessage(prompt)}
+          disabled={isStreaming}
+          activePrompt={lastUserQuestion}
+          variant="panel"
+        />
       </div>
 
       <form

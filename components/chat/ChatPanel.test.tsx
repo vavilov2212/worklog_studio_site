@@ -42,4 +42,14 @@ describe('ChatPanel', () => {
     expect(screen.getByText('What is Worklog Studio?')).toBeInTheDocument();
     expect(screen.getByText('Hi there')).toBeInTheDocument();
   });
+
+  it('shows only the first three suggested prompts by default', () => {
+    render(
+      <ChatProvider>
+        <ChatPanel />
+      </ChatProvider>
+    );
+    expect(screen.getByText('What does Frictionless Tracking mean?')).toBeInTheDocument();
+    expect(screen.queryByText('Is Focus Analytics available yet?')).not.toBeInTheDocument();
+  });
 });
