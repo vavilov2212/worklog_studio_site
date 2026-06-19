@@ -4,7 +4,7 @@ import { Apple, Download, Monitor } from 'lucide-react';
 
 export default function DownloadSection() {
   return (
-    <section id="download" className="max-w-6xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+    <section id="download" className="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export default function DownloadSection() {
               <Apple className="w-5 h-5 md:w-6 md:h-6 fill-current" />
               Download for Mac
             </a>
-            <button className="w-full sm:w-auto px-6 py-4 md:px-10 md:py-5 bg-accent-foreground/10 text-white/50 border border-white/20 font-black rounded-xl md:rounded-2xl cursor-not-allowed flex items-center justify-center gap-2 md:gap-3">
+            <button className="w-full sm:w-auto px-6 py-4 md:px-10 md:py-5 bg-white/10 text-white/50 border border-white/20 font-black rounded-xl md:rounded-2xl cursor-not-allowed flex items-center justify-center gap-2 md:gap-3">
               <Monitor className="w-5 h-5 md:w-6 md:h-6" />
               Windows Next
             </button>

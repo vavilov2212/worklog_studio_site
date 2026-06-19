@@ -3,6 +3,7 @@
 import { Sparkles } from 'lucide-react';
 import { useChat } from './ChatContext';
 import ChatPanel from './ChatPanel';
+import { SUGGESTED_PROMPTS } from './suggestedPrompts';
 
 export default function AskAISection() {
   const { messages, sendMessage } = useChat();
@@ -10,14 +11,28 @@ export default function AskAISection() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const input = e.currentTarget.elements.namedItem('question') as HTMLInputElement;
+    const input = e.currentTarget.elements.namedItem('question') as HTMLTextAreaElement;
     if (!input.value.trim()) return;
     void sendMessage(input.value.trim());
     input.value = '';
+    input.style.height = 'auto';
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      e.currentTarget.form?.requestSubmit();
+    }
+  };
+
+  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const textarea = e.currentTarget;
+    textarea.style.height = 'auto';
+    textarea.style.height = `${Math.min(textarea.scrollHeight, 120)}px`;
   };
 
   return (
-    <section className="max-w-3xl mx-auto px-6 md:px-8 -mt-4 md:-mt-8 pb-16 md:pb-24">
+    <section className="max-w-3xl mx-auto px-6 md:px-8 pt-8 md:pt-12 pb-16 md:pb-24">
       <div className="bg-white border border-border rounded-[2rem] shadow-xl overflow-hidden">
         {!expanded ? (
           <form
@@ -34,11 +49,30 @@ export default function AskAISection() {
             <p className="text-slate text-sm mb-6">
               Get instant answers about features, the roadmap, or the author.
             </p>
-            <input
+            <textarea
               name="question"
               placeholder="Ask anything..."
-              className="w-full text-sm bg-subtle border border-border rounded-xl px-4 py-3 text-center focus:outline-none focus:border-accent/40"
+              rows={1}
+              autoComplete="off"
+              data-1p-ignore
+              data-lpignore="true"
+              data-bwignore
+              onKeyDown={handleKeyDown}
+              onInput={handleInput}
+              className="no-scrollbar w-full resize-none text-sm bg-subtle border border-border rounded-xl px-4 py-3 text-center focus:outline-none focus:border-accent/40 max-h-[120px] overflow-y-auto"
             />
+            <div className="flex flex-wrap justify-center gap-2 mt-4">
+              {SUGGESTED_PROMPTS.map((prompt) => (
+                <button
+                  key={prompt}
+                  type="button"
+                  onClick={() => void sendMessage(prompt)}
+                  className="text-xs font-medium text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1.5 hover:bg-accent/20 transition-colors cursor-pointer"
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
           </form>
         ) : (
           <div className="h-[480px]">

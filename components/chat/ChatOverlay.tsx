@@ -22,7 +22,7 @@ export default function ChatOverlay() {
             type="button"
             onClick={closeChat}
             aria-label="Close chat"
-            className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-white/80 text-slate hover:text-ink"
+            className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-white/80 text-slate hover:text-ink cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>

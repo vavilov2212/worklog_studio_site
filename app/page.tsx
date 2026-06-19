@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-surface text-on-surface selection:bg-primary/30">
+    <main className="min-h-screen bg-bg text-ink selection:bg-accent/30">
       <Header />
       <Hero />
       <AskAISection />

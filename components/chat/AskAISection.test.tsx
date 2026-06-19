@@ -6,6 +6,7 @@ import AskAISection from './AskAISection';
 beforeEach(() => {
   sessionStorage.clear();
   global.fetch = vi.fn().mockResolvedValue({
+    ok: true,
     body: { getReader: () => ({ read: vi.fn().mockResolvedValue({ done: true, value: undefined }) }) },
   }) as unknown as typeof fetch;
 });

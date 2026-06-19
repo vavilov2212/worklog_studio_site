@@ -6,6 +6,7 @@ import ChatPanel from './ChatPanel';
 beforeEach(() => {
   sessionStorage.clear();
   global.fetch = vi.fn().mockResolvedValue({
+    ok: true,
     body: {
       getReader: () => ({
         read: vi

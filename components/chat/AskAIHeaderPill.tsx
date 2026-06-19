@@ -12,7 +12,7 @@ export default function AskAIHeaderPill() {
       type="button"
       onClick={openChat}
       aria-label="Ask AI"
-      className="flex items-center gap-1.5 text-sm font-bold text-accent hover:text-accent/80 transition-colors px-2.5 py-1.5 rounded-full"
+      className="flex items-center gap-1.5 text-sm font-bold text-accent hover:text-accent/80 transition-colors px-2.5 py-1.5 rounded-full cursor-pointer"
       animate={{
         boxShadow: [
           '0 0 0 0 rgba(37, 99, 235, 0)',
