@@ -4,6 +4,7 @@ import { Sparkles } from 'lucide-react';
 import { useChat } from './ChatContext';
 import ChatPanel from './ChatPanel';
 import { SUGGESTED_PROMPTS } from './suggestedPrompts';
+import SuggestedPromptChips from './SuggestedPromptChips';
 
 export default function AskAISection() {
   const { messages, sendMessage } = useChat();
@@ -61,18 +62,11 @@ export default function AskAISection() {
               onInput={handleInput}
               className="no-scrollbar w-full resize-none text-sm bg-subtle border border-border rounded-xl px-4 py-3 text-center focus:outline-none focus:border-accent/40 max-h-[120px] overflow-y-auto"
             />
-            <div className="flex flex-wrap justify-center gap-2 mt-4">
-              {SUGGESTED_PROMPTS.map((prompt) => (
-                <button
-                  key={prompt}
-                  type="button"
-                  onClick={() => void sendMessage(prompt)}
-                  className="text-xs font-medium text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1.5 hover:bg-accent/20 transition-colors cursor-pointer"
-                >
-                  {prompt}
-                </button>
-              ))}
-            </div>
+            <SuggestedPromptChips
+              prompts={SUGGESTED_PROMPTS}
+              onSelect={(prompt) => void sendMessage(prompt)}
+              variant="hero"
+            />
           </form>
         ) : (
           <div className="h-[480px]">

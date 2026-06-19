@@ -32,4 +32,16 @@ describe('AskAISection', () => {
     fireEvent.submit(screen.getByRole('form'));
     expect(screen.getByText('What is this?')).toBeInTheDocument();
   });
+
+  it('shows only the first three suggested prompts by default', () => {
+    render(
+      <ChatProvider>
+        <AskAISection />
+      </ChatProvider>
+    );
+    expect(screen.getByText('What does Frictionless Tracking mean?')).toBeInTheDocument();
+    expect(screen.getByText('What integrations are planned?')).toBeInTheDocument();
+    expect(screen.getByText('Who maintains this project?')).toBeInTheDocument();
+    expect(screen.queryByText('Is Focus Analytics available yet?')).not.toBeInTheDocument();
+  });
 });
