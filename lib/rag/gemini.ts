@@ -45,6 +45,7 @@ export async function embedQuery(text: string): Promise<number[]> {
     ai.models.embedContent({
       model: EMBEDDING_MODEL,
       contents: [text],
+      config: { taskType: 'RETRIEVAL_QUERY' },
     })
   );
   const values = response.embeddings?.[0]?.values;

@@ -26,6 +26,7 @@ describe('embedQuery', () => {
     expect(embedContent).toHaveBeenCalledWith({
       model: 'gemini-embedding-001',
       contents: ['hello'],
+      config: { taskType: 'RETRIEVAL_QUERY' },
     });
   });
 

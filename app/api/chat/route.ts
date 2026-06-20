@@ -7,7 +7,7 @@ import embeddingsData from '@/lib/rag/embeddings.json';
 const SYSTEM_INSTRUCTION = `You are the Worklog Studio assistant. Answer only using the provided context about the product and its author. If the answer isn't in the context, say you don't know and suggest contacting Roman directly. Be concise.`;
 
 const TOP_K = 4;
-const SIMILARITY_THRESHOLD = 0.7;
+const SIMILARITY_THRESHOLD = 0.6;
 
 export async function POST(request: Request): Promise<Response> {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';

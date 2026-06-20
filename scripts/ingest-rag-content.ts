@@ -30,6 +30,7 @@ async function main() {
     const response = await ai.models.embedContent({
       model: EMBEDDING_MODEL,
       contents: batch.map((c) => c.text),
+      config: { taskType: 'RETRIEVAL_DOCUMENT' },
     });
 
     batch.forEach((chunk, j) => {
