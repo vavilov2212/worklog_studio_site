@@ -52,4 +52,15 @@ describe('ChatPanel', () => {
     expect(screen.getByText('What does Frictionless Tracking mean?')).toBeInTheDocument();
     expect(screen.queryByText('Is Focus Analytics available yet?')).not.toBeInTheDocument();
   });
+
+  it('reveals all 18 suggested prompts after clicking Show more', () => {
+    render(
+      <ChatProvider>
+        <ChatPanel />
+      </ChatProvider>
+    );
+    fireEvent.click(screen.getByText(/show more/i));
+    expect(screen.getByText('Is Focus Analytics available yet?')).toBeInTheDocument();
+    expect(screen.getByText("What's the license?")).toBeInTheDocument();
+  });
 });

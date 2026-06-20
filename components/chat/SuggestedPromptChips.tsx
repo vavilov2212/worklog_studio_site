@@ -18,7 +18,10 @@ export default function SuggestedPromptChips({
   activePrompt?: string;
   variant: 'hero' | 'panel';
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(() => {
+    if (!activePrompt) return false;
+    return !prompts.slice(0, DEFAULT_VISIBLE_COUNT).includes(activePrompt);
+  });
   const hasMore = prompts.length > DEFAULT_VISIBLE_COUNT;
   const visiblePrompts = expanded ? prompts : prompts.slice(0, DEFAULT_VISIBLE_COUNT);
 

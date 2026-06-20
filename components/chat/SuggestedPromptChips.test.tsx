@@ -60,4 +60,12 @@ describe('SuggestedPromptChips', () => {
     const button = screen.getByText('B').closest('button');
     expect(button?.querySelector('svg')).not.toBeInTheDocument();
   });
+
+  it('starts expanded when the active prompt is outside the default-visible set', () => {
+    render(
+      <SuggestedPromptChips prompts={PROMPTS} onSelect={vi.fn()} activePrompt="D" variant="panel" />
+    );
+    expect(screen.getByText('D')).toBeInTheDocument();
+    expect(screen.getByText('E')).toBeInTheDocument();
+  });
 });

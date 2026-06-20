@@ -44,4 +44,15 @@ describe('AskAISection', () => {
     expect(screen.getByText('Who maintains this project?')).toBeInTheDocument();
     expect(screen.queryByText('Is Focus Analytics available yet?')).not.toBeInTheDocument();
   });
+
+  it('reveals all 18 suggested prompts after clicking Show more', () => {
+    render(
+      <ChatProvider>
+        <AskAISection />
+      </ChatProvider>
+    );
+    fireEvent.click(screen.getByText(/show more/i));
+    expect(screen.getByText('Is Focus Analytics available yet?')).toBeInTheDocument();
+    expect(screen.getByText("What's the license?")).toBeInTheDocument();
+  });
 });
