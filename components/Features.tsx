@@ -6,7 +6,7 @@ import FeatureVisual from './FeatureVisual';
 
 export default function Features() {
   return (
-    <section id="features" className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-12 pb-20 lg:pt-24 lg:pb-32">
+    <section id="features" className="relative max-w-7xl mx-auto px-6 md:px-8 pt-16 pb-16 md:pt-24 md:pb-24">
       <div className="text-center mb-16 lg:mb-24">
         <span className="inline-block px-4 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold tracking-widest uppercase mb-6 border border-accent/20">
           Core Features

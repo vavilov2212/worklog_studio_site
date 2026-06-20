@@ -67,12 +67,12 @@ export default function FeatureVisual({ activeFeature }: { activeFeature: number
                >
                   {isRunning ? (
                     <>
-                      <Square className="w-2.5 h-2.5 sm:w-3 h-3 fill-current" /> 
+                      <Square className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
                       <span className="hidden sm:inline">Stop</span>
                     </>
                   ) : (
                     <>
-                      <Play className="w-2.5 h-2.5 sm:w-3 h-3 fill-current ml-0.5" /> 
+                      <Play className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current ml-0.5" />
                       <span className="hidden sm:inline">Start</span>
                     </>
                   )}

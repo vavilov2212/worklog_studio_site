@@ -2,21 +2,20 @@
 import { motion } from 'motion/react';
 
 const items = [
-  { phase: "Q1 2026", title: "macOS App", status: "Released", active: true },
-  { phase: "Q2 2026", title: "Advanced Analytics", status: "In Progress", active: true },
-  { phase: "Q4 2026", title: "Windows Support", status: "Planned", active: false },
+  { phase: "Q1 2026", title: "Desktop App — macOS & Windows", status: "Released", active: true },
+  { phase: "Q4 2026", title: "Advanced Analytics", status: "Planned", active: false },
   { phase: "2027", title: "Team Collaboration", status: "Planned", active: false }
 ];
 
 export default function Roadmap() {
   return (
-    <section id="roadmap" className="max-w-7xl mx-auto px-8 py-16 lg:py-24 border-t border-border">
+    <section id="roadmap" className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t border-border">
       <div className="mb-12 lg:mb-16">
         <h2 className="text-3xl md:text-5xl font-bold font-sans text-ink mb-6">The Roadmap</h2>
         <p className="text-slate max-w-2xl text-lg">We&apos;re building the future of time tracking in public. Here is what&apos;s coming next.</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {items.map((item, i) => (
           <motion.div 
             key={i} 
