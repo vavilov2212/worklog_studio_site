@@ -5,13 +5,14 @@ import { Sparkles } from 'lucide-react';
 import { useChat } from './ChatContext';
 
 export default function AskAIHeaderPill() {
-  const { openChat } = useChat();
+  const { isOpen, openChat, closeChat } = useChat();
 
   return (
     <motion.button
       type="button"
-      onClick={openChat}
+      onClick={isOpen ? closeChat : openChat}
       aria-label="Ask AI"
+      aria-expanded={isOpen}
       className="flex items-center gap-1.5 text-sm font-bold text-accent hover:text-accent/80 transition-colors px-2.5 py-1.5 rounded-full cursor-pointer"
       animate={{
         boxShadow: [

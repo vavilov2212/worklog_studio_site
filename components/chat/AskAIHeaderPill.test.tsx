@@ -32,4 +32,18 @@ describe('AskAIHeaderPill', () => {
     fireEvent.click(screen.getByRole('button', { name: /ask ai/i }));
     expect(screen.getByTestId('open')).toHaveTextContent('true');
   });
+
+  it('closes the chat when clicked again (toggle behavior)', () => {
+    render(
+      <ChatProvider>
+        <AskAIHeaderPill />
+        <OpenStateProbe />
+      </ChatProvider>
+    );
+    const button = screen.getByRole('button', { name: /ask ai/i });
+    fireEvent.click(button);
+    expect(screen.getByTestId('open')).toHaveTextContent('true');
+    fireEvent.click(button);
+    expect(screen.getByTestId('open')).toHaveTextContent('false');
+  });
 });

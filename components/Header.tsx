@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Logo } from './Logo';
 import Link from 'next/link';
-import { Github, Download } from 'lucide-react';
+import { Github, Download, Menu, X } from 'lucide-react';
 import AskAIHeaderPill from './chat/AskAIHeaderPill';
 import ChatOverlay from './chat/ChatOverlay';
 import { useRelease } from './ReleaseContext';
@@ -14,6 +14,7 @@ import { getPlatformLinks } from '@/lib/release';
 export default function Header() {
   const release = useRelease();
   const [os, setOs] = useState<DetectedOS>('other');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     requestAnimationFrame(() => {
@@ -23,6 +24,7 @@ export default function Header() {
 
   const { primaryOS, primaryUrl } = getPlatformLinks(os, release);
   const label = primaryOS === 'mac' ? 'Download for Mac' : primaryOS === 'windows' ? 'Download for Windows' : 'Download';
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <motion.header
@@ -43,23 +45,62 @@ export default function Header() {
           <AskAIHeaderPill />
           <a
             href={primaryUrl}
-            className="flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors p-2 sm:p-0"
+            className="hidden md:flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-colors"
             title={label}
           >
-            <Download className="w-5 h-5 sm:w-4 sm:h-4" />
-            <span className="hidden sm:inline-block whitespace-nowrap">{label}</span>
+            <Download className="w-4 h-4" />
+            <span className="whitespace-nowrap">{label}</span>
           </a>
           <a
             href="https://github.com/vavilov2212/wl-studio"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 text-slate hover:text-ink transition-colors"
+            className="hidden md:block p-2 text-slate hover:text-ink transition-colors"
             aria-label="GitHub Repository"
           >
             <Github className="w-5 h-5" />
           </a>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+            className="md:hidden p-2 text-slate hover:text-ink transition-colors cursor-pointer"
+          >
+            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.nav
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden overflow-hidden border-t border-border bg-white"
+          >
+            <div className="flex flex-col px-6 py-4 gap-4 font-sans text-sm font-medium">
+              <Link href="#features" onClick={closeMenu} className="text-slate hover:text-ink transition-colors">Features</Link>
+              <Link href="#roadmap" onClick={closeMenu} className="text-slate hover:text-ink transition-colors">Roadmap</Link>
+              <a href={primaryUrl} onClick={closeMenu} className="flex items-center gap-2 text-accent font-bold">
+                <Download className="w-4 h-4" />
+                {label}
+              </a>
+              <a
+                href="https://github.com/vavilov2212/wl-studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="flex items-center gap-2 text-slate hover:text-ink transition-colors"
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+              </a>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
       <ChatOverlay />
     </motion.header>
   );
