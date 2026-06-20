@@ -16,7 +16,7 @@ export default function ChatOverlay() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -10 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-x-0 top-20 bottom-0 md:inset-x-auto md:bottom-auto md:right-8 z-50 w-full md:w-[380px] h-auto md:h-[560px] pb-[max(1rem,env(safe-area-inset-bottom))] pl-[max(0.5rem,env(safe-area-inset-left))] pr-[max(0.5rem,env(safe-area-inset-right))] md:p-0 bg-white rounded-t-2xl md:rounded-2xl border-t md:border border-border shadow-2xl overflow-hidden"
+          className="fixed inset-x-0 top-20 bottom-0 md:inset-x-auto md:bottom-auto md:right-8 z-50 w-full md:w-[380px] h-auto md:h-[560px] pb-[max(1rem,env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] md:p-0 bg-white rounded-t-2xl md:rounded-2xl border-t md:border border-border shadow-2xl overflow-hidden"
         >
           <button
             type="button"

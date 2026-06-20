@@ -69,7 +69,7 @@ export default function ChatPanel() {
 
   return (
     <div className="flex flex-col h-full bg-white">
-      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col justify-end">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col">
         {messages.map((message, i) => (
           <div
             key={i}
@@ -83,13 +83,15 @@ export default function ChatPanel() {
           </div>
         ))}
 
-        <SuggestedPromptChips
-          prompts={SUGGESTED_PROMPTS}
-          onSelect={(prompt) => void sendMessage(prompt)}
-          disabled={isStreaming}
-          activePrompt={lastUserQuestion}
-          variant="panel"
-        />
+        <div className={messages.length === 0 ? 'mt-auto' : undefined}>
+          <SuggestedPromptChips
+            prompts={SUGGESTED_PROMPTS}
+            onSelect={(prompt) => void sendMessage(prompt)}
+            disabled={isStreaming}
+            activePrompt={lastUserQuestion}
+            variant="panel"
+          />
+        </div>
       </div>
 
       <form
