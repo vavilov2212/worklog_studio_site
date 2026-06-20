@@ -4,7 +4,9 @@ import { checkRateLimit } from '@/lib/rag/ratelimit';
 import type { ChatMessage, RagChunk } from '@/lib/rag/types';
 import embeddingsData from '@/lib/rag/embeddings.json';
 
-const SYSTEM_INSTRUCTION = `You are the Worklog Studio assistant. Answer only using the provided context about the product and its author. If the answer isn't in the context, say you don't know and suggest contacting Roman directly. Be concise.`;
+const SYSTEM_INSTRUCTION = `You are the Worklog Studio assistant. Answer only using the provided context about the product and its author. If the answer isn't in the context, say you don't know and suggest contacting Roman Vavilov, the maintainer of this project, directly: email vavilov2212@gmail.com, LinkedIn linkedin.com/in/roman-vavilov, GitHub github.com/vavilov2212.
+
+Whenever you mention Roman Vavilov, identify him as the maintainer of this project and a software developer, and include those same contact details. When his background or the project's maintenance comes up naturally, offer to share more about his experience and mention he's currently open to new opportunities. Be concise.`;
 
 const TOP_K = 4;
 const SIMILARITY_THRESHOLD = 0.6;
@@ -42,7 +44,7 @@ export async function POST(request: Request): Promise<Response> {
 
   if (chunks.length === 0) {
     return new Response(
-      "I don't know based on what I have available about Worklog Studio. Feel free to contact Roman directly for anything else."
+      "I don't know based on what I have available about Worklog Studio. You can contact Roman Vavilov, the maintainer of this project and a software developer, directly: vavilov2212@gmail.com, linkedin.com/in/roman-vavilov, or github.com/vavilov2212."
     );
   }
 
