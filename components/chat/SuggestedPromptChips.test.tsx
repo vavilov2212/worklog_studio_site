@@ -61,11 +61,41 @@ describe('SuggestedPromptChips', () => {
     expect(button?.querySelector('svg')).not.toBeInTheDocument();
   });
 
-  it('starts expanded when the active prompt is outside the default-visible set', () => {
-    render(
-      <SuggestedPromptChips prompts={PROMPTS} onSelect={vi.fn()} activePrompt="D" variant="panel" />
-    );
+  it('pins the clicked prompt as visible and collapses the list', () => {
+    render(<SuggestedPromptChips prompts={PROMPTS} onSelect={vi.fn()} variant="panel" />);
+    fireEvent.click(screen.getByText(/show more/i));
+    fireEvent.click(screen.getByText('D'));
+
     expect(screen.getByText('D')).toBeInTheDocument();
+    expect(screen.getByText('A')).toBeInTheDocument();
+    expect(screen.getByText('B')).toBeInTheDocument();
+    expect(screen.queryByText('C')).not.toBeInTheDocument();
+    expect(screen.queryByText('E')).not.toBeInTheDocument();
+    expect(screen.queryByText(/show less/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/show more/i)).toBeInTheDocument();
+  });
+
+  it('pins multiple asked prompts, most recently asked first', () => {
+    render(<SuggestedPromptChips prompts={PROMPTS} onSelect={vi.fn()} variant="panel" />);
+    fireEvent.click(screen.getByText(/show more/i));
+    fireEvent.click(screen.getByText('D'));
+    fireEvent.click(screen.getByText(/show more/i));
+    fireEvent.click(screen.getByText('E'));
+
     expect(screen.getByText('E')).toBeInTheDocument();
+    expect(screen.getByText('D')).toBeInTheDocument();
+    expect(screen.getByText('A')).toBeInTheDocument();
+    expect(screen.queryByText('B')).not.toBeInTheDocument();
+    expect(screen.queryByText('C')).not.toBeInTheDocument();
+  });
+
+  it('does not duplicate a prompt that is asked twice', () => {
+    render(<SuggestedPromptChips prompts={PROMPTS} onSelect={vi.fn()} variant="panel" />);
+    fireEvent.click(screen.getByText(/show more/i));
+    fireEvent.click(screen.getByText('D'));
+    fireEvent.click(screen.getByText(/show more/i));
+    fireEvent.click(screen.getByText('D'));
+
+    expect(screen.getAllByText('D')).toHaveLength(1);
   });
 });

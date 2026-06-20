@@ -18,12 +18,20 @@ export default function SuggestedPromptChips({
   activePrompt?: string;
   variant: 'hero' | 'panel';
 }) {
-  const [expanded, setExpanded] = useState(() => {
-    if (!activePrompt) return false;
-    return !prompts.slice(0, DEFAULT_VISIBLE_COUNT).includes(activePrompt);
-  });
+  const [expanded, setExpanded] = useState(false);
+  const [recentlyAsked, setRecentlyAsked] = useState<string[]>([]);
+
+  const handleSelect = (prompt: string) => {
+    setRecentlyAsked((prev) => [prompt, ...prev.filter((p) => p !== prompt)].slice(0, DEFAULT_VISIBLE_COUNT));
+    setExpanded(false);
+    onSelect(prompt);
+  };
+
   const hasMore = prompts.length > DEFAULT_VISIBLE_COUNT;
-  const visiblePrompts = expanded ? prompts : prompts.slice(0, DEFAULT_VISIBLE_COUNT);
+  const pinned = recentlyAsked.filter((p) => prompts.includes(p));
+  const fillers = prompts.filter((p) => !pinned.includes(p));
+  const collapsedPrompts = [...pinned, ...fillers].slice(0, DEFAULT_VISIBLE_COUNT);
+  const visiblePrompts = expanded ? prompts : collapsedPrompts;
 
   return (
     <div>
@@ -34,7 +42,7 @@ export default function SuggestedPromptChips({
             <button
               key={prompt}
               type="button"
-              onClick={() => onSelect(prompt)}
+              onClick={() => handleSelect(prompt)}
               disabled={disabled}
               className={
                 variant === 'hero'
